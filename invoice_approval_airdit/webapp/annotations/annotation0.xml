@@ -1,0 +1,146 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/odata/v2/zp-aisp-povim-head-bndsample/$metadata">
+        <edmx:Include Namespace="ZP_AISP_POVIM_HEAD_BNDSampleService" Alias="SAP"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local1">
+         <Annotations Target="SAP.VIMPOHead">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Ebeln" />
+                            <PropertyValue Property="Label" String="PO Number" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Vbeln" />
+                            <PropertyValue Property="Label" String="ASN Number" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Invoicerefno" />
+                            <PropertyValue Property="Label" String="Invoice Number" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="AsnDate" />
+                            <PropertyValue Property="Label" String="Invoice Date" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="SAP.RejectedTab">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Ebeln" />
+                            <PropertyValue Property="Label" String="PO Number" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Vbeln" />
+                            <PropertyValue Property="Label" String="ASN Number" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="AsnDate" />
+                            <PropertyValue Property="Label" String="Invoice Date" />
+                        </Record>
+                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="REJECTED_COMMENT" />
+                            <PropertyValue Property="Label" String="Comment" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="SAP.VIMPOHead">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>REQUEST_NO</PropertyPath>
+                        <PropertyPath>Ebeln</PropertyPath>
+                        <PropertyPath>Vbeln</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+              <Annotations Target="SAP.VIMPOHead/Ebeln">
+            <Annotation Term="Common.Label" String="PO Number" />
+        </Annotations>
+
+         <Annotations Target="SAP.VIMPOHead/Vbeln">
+            <Annotation Term="Common.Label" String="ASN Number" />
+        </Annotations>
+
+         <Annotations Target="SAP.VIMPOHead/REQUEST_NO">
+            <Annotation Term="Common.Label" String="Request No." />
+        </Annotations>
+
+        <Annotations Target="SAP.VIMPOHead/REQUEST_NO">
+            <Annotation Term="Common.ValueList">
+                <Record Type="Common.ValueListType">
+                    <PropertyValue Property="CollectionPath" String="VIMPOHead"/>
+                    <PropertyValue Property="SearchSupported" Bool="true"/>
+                    <PropertyValue Property="Parameters">
+                        <Collection>
+                            <Record Type="Common.ValueListParameterInOut">
+                                <PropertyValue Property="LocalDataProperty" PropertyPath="REQUEST_NO"/>
+                                <PropertyValue Property="ValueListProperty" String="REQUEST_NO"/>
+                            </Record>
+                            <Record Type="Common.ValueListParameterDisplayOnly">
+                                <PropertyValue Property="ValueListProperty" String="Ebeln"/>
+                            </Record>
+                        </Collection>
+                    </PropertyValue>
+                </Record>
+            </Annotation>
+        </Annotations>
+
+        <Annotations Target="SAP.VIMPOHead/Ebeln">
+            <Annotation Term="Common.ValueList">
+                <Record Type="Common.ValueListType">
+                    <PropertyValue Property="CollectionPath" String="VIMPOHead"/>
+                    <PropertyValue Property="SearchSupported" Bool="true"/>
+                    <PropertyValue Property="Parameters">
+                        <Collection>
+                            <Record Type="Common.ValueListParameterInOut">
+                                <PropertyValue Property="LocalDataProperty" PropertyPath="Ebeln"/>
+                                <PropertyValue Property="ValueListProperty" String="Ebeln"/>
+                            </Record>
+                            <Record Type="Common.ValueListParameterDisplayOnly">
+                                <PropertyValue Property="ValueListProperty" String="Vbeln"/>
+                            </Record>
+                        </Collection>
+                    </PropertyValue>
+                </Record>
+            </Annotation>
+        </Annotations>
+
+         <Annotations Target="SAP.VIMPOHead/Vbeln">
+            <Annotation Term="Common.ValueList">
+                <Record Type="Common.ValueListType">
+                    <PropertyValue Property="CollectionPath" String="VIMPOHead"/>
+                    <PropertyValue Property="SearchSupported" Bool="true"/>
+                    <PropertyValue Property="Parameters">
+                        <Collection>
+                            <Record Type="Common.ValueListParameterInOut">
+                                <PropertyValue Property="LocalDataProperty" PropertyPath="Vbeln"/>
+                                <PropertyValue Property="ValueListProperty" String="Vbeln"/>
+                            </Record>
+                            <Record Type="Common.ValueListParameterDisplayOnly">
+                                <PropertyValue Property="ValueListProperty" String="Ebeln"/>
+                            </Record>
+                        </Collection>
+                    </PropertyValue>
+                </Record>
+            </Annotation>
+        </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
