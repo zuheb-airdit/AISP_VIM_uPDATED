@@ -116,7 +116,7 @@
 
                 <IconTabFilter
                     key="rejected"
-                    icon="./Images/submitted.png"
+                    icon="./Images/Rejected.png"
                     text="Rejected"
                 >
                     <smartTable:SmartTable
@@ -140,6 +140,89 @@
                             growing="true"
                             growingThreshold="10"
                             id="idTableInvoiceSub"
+                        >
+                            <columns>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "REQUEST_NO","leadingProperty": "REQUEST_NO", "sortProperty": "REQUEST_NO", "filterProperty": "REQUEST_NO", "columnIndex": "0" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Request No."
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "ASNamount","leadingProperty": "ASNamount", "sortProperty": "ASNamount", "filterProperty": "ASNamount", "columnIndex": "2" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Amount"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem
+                                    vAlign="Middle"
+                                    type="Navigation"
+                                    press="onClickInvoice"
+                                >
+                                    <cells>
+                                        <!-- <ObjectStatus
+                                            text="{path: 'Status', formatter: '.formatter.statusFormattertest'}"
+                                            state="{path: 'Status', formatter: '.formatter.indicationFormat'}"
+                                            inverted="true"
+                                            class="noWrapText"
+                                        /> -->
+                                        <Text text="{REQUEST_NO}" />
+                                        <ObjectNumber
+                                            class="sapUiSmallMarginBottom"
+                                            number="{
+						parts:[{path:'ASNamount'},{path:'Waers'}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {showMeasure: false}
+					}"
+                                            unit="INR"
+                                        />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </smartTable:SmartTable>
+                </IconTabFilter>
+
+                 <IconTabFilter
+                    key="approved"
+                    icon="./Images/submitted.png"
+                    text="Approved"
+                >
+                    <smartTable:SmartTable
+                        entitySet="ApprovedTab"
+                        smartFilterId="smartFilterBar"
+                        enableExport="true"
+                        beforeExport="onBeforeExport"
+                        useVariantManagement="true"
+                        useTablePersonalisation="true"
+                        header="Items"
+                        showRowCount="true"
+                        persistencyKey="SmartTableRefApp_Explored"
+                        enableAutoBinding="true"
+                        tableType="ResponsiveTable"
+                        demandPopin="true"
+                        enableAutoColumnWidth="false"
+                        id="smartTableSRej"
+                    >
+                        <Table
+                            selectionChange="selectionChangeHandlerRregister"
+                            growing="true"
+                            growingThreshold="10"
+                            id="idTableInvoiceRej"
                         >
                             <columns>
                                 <Column>

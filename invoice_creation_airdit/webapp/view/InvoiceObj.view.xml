@@ -64,7 +64,7 @@
                 </snappedHeading>
                 <actions>
                     <m:Button
-                        icon="sap-icon://edit"
+                        text="Edit"
                         press="onPressEdit"
                         type="Emphasized"
                         visible="{= ${headData>/Status} === 'REJECTED' }"
@@ -242,7 +242,9 @@
                                     <m:DatePicker
                                         id="idInvoiceDate"
                                         width="10rem"
+                                        enabled="{= ${headData>/Status} === 'REJECTED' }"
                                         editable="{headData>/editable}"
+                                         minDate="{headData>/cDate}"
                                         value="{headData>/Invoicedate}"
                                         displayFormat="yyyy-MM-dd"
                                     />
@@ -410,7 +412,10 @@
                     </ObjectPageSubSection>
                 </subSections>
             </ObjectPageSection>
-            <ObjectPageSection title="Attachments" titleUppercase="false">
+            <ObjectPageSection
+                title="Attachments"
+                titleUppercase="false"
+            >
                 <subSections>
                     <ObjectPageSubSection>
                         <blocks>
@@ -496,14 +501,13 @@
                                                         press="onPreviewAttachment"
                                                         class="sapUiTinyMarginEnd"
                                                     >
-                                                      <m:customData>
-                                            <core:CustomData
-                                                key="imageUrl"
-                                                value="{attachmentsModel>IMAGEURL}"
-                                                writeToDom="false"
-                                            />
-
-                                        </m:customData>
+                                                        <m:customData>
+                                                            <core:CustomData
+                                                                key="imageUrl"
+                                                                value="{attachmentsModel>IMAGEURL}"
+                                                                writeToDom="false"
+                                                            />
+                                                        </m:customData>
                                                     </m:Button>
                                                     <m:Button
                                                         icon="sap-icon://delete"

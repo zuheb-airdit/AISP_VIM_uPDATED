@@ -15,6 +15,19 @@
             "version": "1.17.3",
             "toolsId": "88324d93-dfad-4c32-93fc-d91ef58aa398"
         },
+        "crossNavigation": {
+            "inbounds": {
+                "SupplierForm-Creation": {
+                    "semanticObject": "Vendor_Invoice",
+                    "action": "Approval",
+                    "title": "Invoice Approval",
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    }
+                }
+            }
+        },
         "dataSources": {
             "mainService": {
                 "uri": "/odata/v2/zp-aisp-povim-head-bndsample/",
