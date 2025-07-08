@@ -10,7 +10,8 @@
 >
     <Page
         showFooter="false"
-        showHeader="false"
+        showHeader="true"
+        title="Invoice Approval"
     >
         <smartFilterBar:SmartFilterBar
             id="smartFilterBar"
