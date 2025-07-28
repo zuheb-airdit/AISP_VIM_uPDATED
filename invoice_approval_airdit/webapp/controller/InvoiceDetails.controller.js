@@ -14,6 +14,8 @@ sap.ui.define([
             oRouter.getRoute("InvoiceDetails").attachPatternMatched(this._onObjectMatched, this);
             let oModel = this.getOwnerComponent().getModel();
             this.getView().setModel(oModel)
+            let admModel = this.getOwnerComponent().getModel("admin");
+            this.getView().setModel(admModel,"fiedlModel")
         },
 
         _onObjectMatched: function (oEvent) {
@@ -25,7 +27,7 @@ sap.ui.define([
             ];
 
             let oModel = this.getView().getModel();
-
+            this._loadFieldConfig();
             oModel.read("/VIMDATA", {
                 filters: oFilters,
                 success: function (res) {
@@ -59,6 +61,41 @@ sap.ui.define([
                     sap.m.MessageToast.show("Failed to load PO data.");
                 }
             });
+        },
+
+        _loadFieldConfig: function (oODataModel) {
+            var that = this;
+            let aModel = this.getView().getModel("fiedlModel");
+            aModel.read("/VIM_FORM_CONFIG", {
+                filters: [
+                    new sap.ui.model.Filter("APPLICATION_NAME", "EQ", "AISP_VIM_WO_OCR"),
+                ],
+                success: function (oData) {
+                    // Process the configuration data
+                    debugger;
+                    var oFieldConfig = that._processFieldConfig(oData.results);
+                    var oFieldConfigModel = new JSONModel({
+                        fields: oFieldConfig
+                    });
+                    that.getView().setModel(oFieldConfigModel,"fieldConfig");
+                },
+                error: function (oError) {
+                    sap.m.MessageToast.show("Error loading field configuration");
+                }
+            });
+        },
+
+        _processFieldConfig: function (aResults) {
+            var oFieldConfig = {};
+            aResults.forEach(function (oItem) {
+                var sKey = oItem.TECH_FIELD || oItem.FIELD_NAME; // Use TECH_FIELD or FIELD_NAME as key
+                oFieldConfig[sKey] = {
+                    visible: oItem.VISIBLE,
+                    mandatory: oItem.MANDATORY,
+                    editable: oItem.EDITABLE
+                };
+            });
+            return oFieldConfig;
         },
 
         onPreviewPdf: function (oEvent) {

@@ -14,6 +14,8 @@ sap.ui.define([
                 attachments: []
             });
             this.getView().setModel(oAttachmentsModel, "attachmentsModel");
+            let admModel = this.getOwnerComponent().getModel("admin");
+            this.getView().setModel(admModel,"fiedlModel")
             oRouter.getRoute("RouteInvoiceObj").attachPatternMatched(this._onObjectMatched, this);
         },
 
@@ -25,7 +27,7 @@ sap.ui.define([
             let status = oEvent.getParameter("arguments").status;
             // Retrieve the OData model from the view
             let oModel = this.getView().getModel();
-
+            this._loadFieldConfig();
             let oFilters = [
                 new Filter("Ebeln", FilterOperator.EQ, poNum),
                 new Filter("Vbeln", FilterOperator.EQ, vbNum)
@@ -119,6 +121,41 @@ sap.ui.define([
 
         },
 
+        _loadFieldConfig: function (oODataModel) {
+            var that = this;
+            let aModel = this.getView().getModel("fiedlModel");
+            aModel.read("/VIM_FORM_CONFIG", {
+                filters: [
+                    new sap.ui.model.Filter("APPLICATION_NAME", "EQ", "AISP_VIM_WO_OCR"),
+                ],
+                success: function (oData) {
+                    // Process the configuration data
+                    debugger;
+                    var oFieldConfig = that._processFieldConfig(oData.results);
+                    var oFieldConfigModel = new JSONModel({
+                        fields: oFieldConfig
+                    });
+                    that.getView().setModel(oFieldConfigModel,"fieldConfig");
+                },
+                error: function (oError) {
+                    sap.m.MessageToast.show("Error loading field configuration");
+                }
+            });
+        },
+
+        _processFieldConfig: function (aResults) {
+            var oFieldConfig = {};
+            aResults.forEach(function (oItem) {
+                var sKey = oItem.TECH_FIELD || oItem.FIELD_NAME; // Use TECH_FIELD or FIELD_NAME as key
+                oFieldConfig[sKey] = {
+                    visible: oItem.VISIBLE,
+                    mandatory: oItem.MANDATORY,
+                    editable: oItem.EDITABLE
+                };
+            });
+            return oFieldConfig;
+        },
+
         calculateTolat: function (results) {
             let total = 0;
             results.map((item) => {
@@ -147,13 +184,11 @@ sap.ui.define([
         onPreviewAttachment: function (oEvent) {
             const oCtx = oEvent.getSource().getBindingContext("attachmentsModel");
             const oData = oCtx.getObject();
-
             if (!oData.IMAGEURL) {
                 MessageBox.error("No file found.");
                 return;
             }
-
-            this.previewAttachment(oData); // 👈 simple call
+            this.previewAttachment(oData);
         },
 
         previewAttachment: function (res) {

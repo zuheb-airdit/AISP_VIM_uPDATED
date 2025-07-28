@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="admin" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="VIM_FORM_CONFIG" EntityType="admin.VIM_FORM_CONFIG"/>
+                <EntitySet Name="VENDOR_ACCOUNT_GROUP" EntityType="admin.VENDOR_ACCOUNT_GROUP"/>
+                <EntitySet Name="RFQ_QUESTION_CONFIG_ENTITY" EntityType="admin.RFQ_QUESTION_CONFIG_ENTITY"/>
+                <EntitySet Name="VENDOR_ACCOUNT_GROUP_ATTACHMENT" EntityType="admin.VENDOR_ACCOUNT_GROUP_ATTACHMENT"/>
+                <AssociationSet Name="VENDOR_ACCOUNT_GROUP_questionnaires" Association="admin.VENDOR_ACCOUNT_GROUP_questionnaires">
+                    <End Role="VENDOR_ACCOUNT_GROUP" EntitySet="VENDOR_ACCOUNT_GROUP"/>
+                    <End Role="RFQ_QUESTION_CONFIG_ENTITY" EntitySet="RFQ_QUESTION_CONFIG_ENTITY"/>
+                </AssociationSet>
+                <AssociationSet Name="VENDOR_ACCOUNT_GROUP_attachments" Association="admin.VENDOR_ACCOUNT_GROUP_attachments">
+                    <End Role="VENDOR_ACCOUNT_GROUP" EntitySet="VENDOR_ACCOUNT_GROUP"/>
+                    <End Role="VENDOR_ACCOUNT_GROUP_ATTACHMENT" EntitySet="VENDOR_ACCOUNT_GROUP_ATTACHMENT"/>
+                </AssociationSet>
+            </EntityContainer>
+            <EntityType Name="VIM_FORM_CONFIG">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="APPLICATION_NAME" Type="Edm.String" MaxLength="50"/>
+                <Property Name="SECTION" Type="Edm.String" MaxLength="40"/>
+                <Property Name="TECH_FIELD" Type="Edm.String" MaxLength="40"/>
+                <Property Name="FIELD_NAME" Type="Edm.String" MaxLength="40"/>
+                <Property Name="VISIBLE" Type="Edm.Boolean"/>
+                <Property Name="MANDATORY" Type="Edm.Boolean"/>
+                <Property Name="EDITABLE" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="VENDOR_ACCOUNT_GROUP">
+                <Key>
+                    <PropertyRef Name="CODE"/>
+                </Key>
+                <Property Name="CODE" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="DESCRIPTION" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="questionnaires" Relationship="admin.VENDOR_ACCOUNT_GROUP_questionnaires" FromRole="VENDOR_ACCOUNT_GROUP" ToRole="RFQ_QUESTION_CONFIG_ENTITY"/>
+                <NavigationProperty Name="attachments" Relationship="admin.VENDOR_ACCOUNT_GROUP_attachments" FromRole="VENDOR_ACCOUNT_GROUP" ToRole="VENDOR_ACCOUNT_GROUP_ATTACHMENT"/>
+            </EntityType>
+            <EntityType Name="RFQ_QUESTION_CONFIG_ENTITY">
+                <Key>
+                    <PropertyRef Name="QUESTION_ID"/>
+                </Key>
+                <Property Name="QUESTION_ID" Type="Edm.String" Nullable="false"/>
+                <Property Name="ACCOUNT_GROUP" Type="Edm.String"/>
+                <Property Name="QUESTION_TEXT" Type="Edm.String"/>
+                <Property Name="QUESTION_TYPE" Type="Edm.String"/>
+                <Property Name="IS_MANDATORY" Type="Edm.Boolean"/>
+                <Property Name="DROPDOWN_VALUES" Type="Edm.String"/>
+                <Property Name="SECTION" Type="Edm.String"/>
+                <Property Name="ORDER" Type="Edm.Int32"/>
+                <Property Name="IS_ACTIVE" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="VENDOR_ACCOUNT_GROUP_ATTACHMENT">
+                <Key>
+                    <PropertyRef Name="DOCUMENT_ID"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="DOCUMENT_ID" Type="Edm.String" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ACCOUNT_GROUP" Type="Edm.String" MaxLength="10"/>
+                <Property Name="FILE_NAME" Type="Edm.String" MaxLength="255"/>
+                <Property Name="FILE_URL" Type="Edm.String" MaxLength="255"/>
+                <Property Name="UPLOAD_DATE" Type="Edm.DateTimeOffset"/>
+                <Property Name="DESCRIPTION" Type="Edm.String" MaxLength="255"/>
+            </EntityType>
+            <Association Name="VENDOR_ACCOUNT_GROUP_questionnaires">
+                <End Role="VENDOR_ACCOUNT_GROUP" Type="admin.VENDOR_ACCOUNT_GROUP" Multiplicity="*"/>
+                <End Role="RFQ_QUESTION_CONFIG_ENTITY" Type="admin.RFQ_QUESTION_CONFIG_ENTITY" Multiplicity="*"/>
+            </Association>
+            <Association Name="VENDOR_ACCOUNT_GROUP_attachments">
+                <End Role="VENDOR_ACCOUNT_GROUP" Type="admin.VENDOR_ACCOUNT_GROUP" Multiplicity="*"/>
+                <End Role="VENDOR_ACCOUNT_GROUP_ATTACHMENT" Type="admin.VENDOR_ACCOUNT_GROUP_ATTACHMENT" Multiplicity="*"/>
+            </Association>
+            <Annotations Target="admin.VIM_FORM_CONFIG/ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="admin.VENDOR_ACCOUNT_GROUP_ATTACHMENT/ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

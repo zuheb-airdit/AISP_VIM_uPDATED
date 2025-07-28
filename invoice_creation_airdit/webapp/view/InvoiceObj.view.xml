@@ -15,7 +15,7 @@
         preserveHeaderStateOnScroll="false"
         headerContentPinnable="true"
         headerContentPinned="false"
-        toggleHeaderOnTitleClick="true"
+        toggleHeaderOnTitleClick="false"
         showFooter="true"
         isChildPage="true"
         upperCaseAnchorBar="false"
@@ -44,21 +44,21 @@
                         wrap="NoWrap"
                         alignItems="Center"
                     >
-                        <m:Avatar
+                        <!-- <m:Avatar
                             src="./Images/objPageIcon.png"
                             displaySize="S"
                             displayShape="Square"
                             class="sapUiTinyMarginEnd"
-                        />
+                        /> -->
                         <m:VBox wrap="Wrap">
                             <m:Title
-                                text="{headData>/Ebeln}"
+                                text="PO NO: {headData>/Ebeln}"
                                 wrapping="true"
                             />
-                            <m:Label
+                            <!-- <m:Label
                                 text="PO NO:"
                                 wrapping="true"
-                            />
+                            /> -->
                         </m:VBox>
                     </m:HBox>
                 </snappedHeading>
@@ -93,19 +93,29 @@
                     src="./Images/objPageIcon.png"
                     displaySize="L"
                     displayShape="Square"
-                    class="sapUiMediumMarginEnd"
+                    class="sapUiMediumMarginEnd sapUiMediumMarginTop"
                 />
-                <m:VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
-                    <m:HBox class="sapUiTinyMarginBottom">
+                <m:VBox
+                    class="sapUiSmallMarginEnd sapUiSmallMarginBottom sapUiMediumMarginTop"
+                >
+                    <m:HBox
+                        class="sapUiTinyMarginBottom"
+                        visible="{fieldConfig>/fields/Lifnr/visible}"
+                    >
                         <m:Label
                             text="Vendor No:"
                             class="sapUiTinyMarginEnd"
                         />
-                        <m:Text text="{headData>/Lifnr}" />
-                        <!-- e.g. 456 -->
+                        <m:ObjectNumber
+                            number="{headData>/Lifnr} {headData>/lifnr}"
+                            state="None"
+                        />
                     </m:HBox>
 
-                    <m:HBox class="sapUiTinyMarginBottom">
+                    <m:HBox
+                        class="sapUiTinyMarginBottom"
+                        visible="{fieldConfig>/fields/Name1/visible}"
+                    >
                         <m:Label
                             text="Vendor Name:"
                             class="sapUiTinyMarginEnd"
@@ -114,7 +124,10 @@
                         <!-- e.g. ABC Technical Supplies -->
                     </m:HBox>
 
-                    <m:HBox class="sapUiTinyMarginBottom">
+                    <m:HBox
+                        class="sapUiTinyMarginBottom"
+                        visible="{fieldConfig>/fields/VendorAddress/visible}"
+                    >
                         <m:Label
                             text="Vendor Address:"
                             class="sapUiTinyMarginEnd"
@@ -128,17 +141,29 @@
                 </m:VBox>
 
                 <!-- SECOND COLUMN: Bank Details -->
-                <m:VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
-                    <m:HBox class="sapUiTinyMarginBottom">
+                <m:VBox
+                    class="sapUiSmallMarginEnd sapUiSmallMarginBottom sapUiMediumMarginTop"
+                >
+                    <m:HBox
+                        class="sapUiTinyMarginBottom"
+                        visible="{fieldConfig>/fields/BankKey/visible}"
+                    >
                         <m:Label
                             text="Bank Key:"
                             class="sapUiTinyMarginEnd"
                         />
-                        <m:Text text="{headData>/Bankkey}{headData>/BankKey}" />
+                        <!-- <m:Text text="{headData>/Bankkey}{headData>/BankKey}" /> -->
+                        <m:ObjectNumber
+                            number="{headData>/Bankkey}{headData>/BankKey}"
+                            state="None"
+                        />
                         <!-- e.g. INB000000086 -->
                     </m:HBox>
 
-                    <m:HBox class="sapUiTinyMarginBottom">
+                    <m:HBox
+                        class="sapUiTinyMarginBottom"
+                        visible="{fieldConfig>/fields/BankName/visible}"
+                    >
                         <m:Label
                             text="Bank Name:"
                             class="sapUiTinyMarginEnd"
@@ -149,20 +174,29 @@
                         <!-- e.g. Indian Bank -->
                     </m:HBox>
 
-                    <m:HBox class="sapUiTinyMarginBottom">
+                    <m:HBox
+                        class="sapUiTinyMarginBottom"
+                        visible="{fieldConfig>/fields/BankAccount/visible}"
+                    >
                         <m:Label
                             text="Bank Account:"
                             class="sapUiTinyMarginEnd"
                         />
-                        <m:Text
+                        <!-- <m:Text
                             text="{headData>/Bankacc} {headData>/BankAccount}"
+                        /> -->
+                        <m:ObjectNumber
+                            number="{headData>/Bankacc} {headData>/BankAccount}"
+                            state="None"
                         />
                         <!-- e.g. Indian Bank -->
                     </m:HBox>
                 </m:VBox>
 
                 <!-- THIRD COLUMN: Status & Order Date -->
-                <m:VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
+                <m:VBox
+                    class="sapUiSmallMarginEnd sapUiSmallMarginBottom sapUiMediumMarginTop"
+                >
                     <m:HBox class="sapUiTinyMarginBottom">
                         <m:Label
                             text="Status:"
@@ -172,7 +206,10 @@
                         <!-- e.g. Invoice Pending -->
                     </m:HBox>
 
-                    <m:HBox class="sapUiTinyMarginBottom">
+                    <m:HBox
+                        class="sapUiTinyMarginBottom"
+                        visible="{fieldConfig>/fields/Bedat/visible}"
+                    >
                         <m:Label
                             text="Order Date:"
                             class="sapUiTinyMarginEnd"
@@ -182,7 +219,10 @@
                         <!-- e.g. 03.04.2025 -->
                     </m:HBox>
 
-                    <m:HBox class="sapUiTinyMarginBottom">
+                    <m:HBox
+                        class="sapUiTinyMarginBottom"
+                        visible="{fieldConfig>/fields/Ekorg/visible}"
+                    >
                         <m:Label
                             text="Purchase Org:"
                             class="sapUiTinyMarginEnd"
@@ -191,7 +231,10 @@
                         <!-- e.g. Consumable Purch Org -->
                     </m:HBox>
 
-                    <m:HBox class="sapUiTinyMarginBottom">
+                    <m:HBox
+                        class="sapUiTinyMarginBottom"
+                        visible="{fieldConfig>/fields/ASNamount/visible}"
+                    >
                         <m:Label
                             text="Amount:"
                             class="sapUiTinyMarginEnd"
@@ -222,7 +265,10 @@
                     <ObjectPageSubSection>
                         <blocks>
                             <m:HBox class="sapUiSmallMargin">
-                                <m:VBox class="sapUiMediumMarginEnd">
+                                <m:VBox
+                                    class="sapUiMediumMarginEnd"
+                                    visible="{fieldConfig>/fields/Invoicerefno/visible}"
+                                >
                                     <m:Label
                                         text="Invoice Number:"
                                         class="sapUiTinyMarginBottom"
@@ -234,7 +280,10 @@
                                         value="{headData>/Invoicerefno}"
                                     />
                                 </m:VBox>
-                                <m:VBox class="sapUiMediumMarginBegin">
+                                <m:VBox
+                                    class="sapUiMediumMarginBegin"
+                                    visible="{fieldConfig>/fields/Invoicedate/visible}"
+                                >
                                     <m:Label
                                         text="Invoice Date:"
                                         class="sapUiTinyMarginBottom"
@@ -244,7 +293,7 @@
                                         width="10rem"
                                         enabled="{= ${headData>/Status} === 'REJECTED' }"
                                         editable="{headData>/editable}"
-                                         minDate="{headData>/cDate}"
+                                        minDate="{headData>/cDate}"
                                         value="{headData>/Invoicedate}"
                                         displayFormat="yyyy-MM-dd"
                                     />
@@ -259,7 +308,9 @@
                 titleUppercase="false"
             >
                 <subSections>
-                    <ObjectPageSubSection>
+                    <ObjectPageSubSection
+                        class="sapUiSmallNegativeMarginBeginEnd"
+                    >
                         <blocks>
                             <m:VBox>
                                 <!-- Scrollable Table Container -->
@@ -281,106 +332,127 @@
                                                     text="Item Details"
                                                     level="H2"
                                                 />
-                                                <!-- Additional toolbar buttons, if needed -->
                                             </m:Toolbar>
                                         </m:headerToolbar>
 
-                                        <!-- Define Columns -->
                                         <m:columns>
-                                            <m:Column width="7rem">
+                                            <m:Column
+                                                width="7rem"
+                                                visible="{fieldConfig>/fields/Ebeln/visible}"
+                                            >
                                                 <m:Text text="PO Number" />
                                             </m:Column>
-                                            <m:Column width="8rem">
+                                            <m:Column
+                                                width="8rem"
+                                                visible="{fieldConfig>/fields/Vbeln/visible}"
+                                            >
                                                 <m:Text text="ASN Number" />
                                             </m:Column>
-                                            <m:Column width="4rem">
+                                            <m:Column
+                                                width="4rem"
+                                                visible="{fieldConfig>/fields/Ebelp/visible}"
+                                            >
                                                 <m:Text text="Item No" />
                                             </m:Column>
-                                            <m:Column width="12rem">
+                                            <m:Column
+                                                width="12rem"
+                                                visible="{fieldConfig>/fields/txz01/visible}"
+                                            >
                                                 <m:Text
                                                     text="Material Description"
                                                 />
                                             </m:Column>
-                                            <m:Column width="5rem">
+                                            <m:Column
+                                                width="5rem"
+                                                visible="{fieldConfig>/fields/meins/visible}"
+                                            >
                                                 <m:Text text="UOM" />
                                             </m:Column>
-                                            <m:Column width="6rem">
+                                            <m:Column
+                                                width="6rem"
+                                                visible="{fieldConfig>/fields/Asnqty/visible}"
+                                            >
                                                 <m:Text text="ASN Qty" />
                                             </m:Column>
-                                            <m:Column width="7rem">
+                                            <m:Column
+                                                width="7rem"
+                                                visible="{fieldConfig>/fields/ASNitamount/visible}"
+                                            >
                                                 <m:Text text="ASN Amt" />
                                             </m:Column>
-                                            <m:Column width="6rem">
+                                            <m:Column
+                                                width="6rem"
+                                                visible="{fieldConfig>/fields/menge/visible}"
+                                            >
                                                 <m:Text text="GRN Qty" />
                                             </m:Column>
-                                            <m:Column width="7rem">
+                                            <m:Column
+                                                width="7rem"
+                                                visible="{fieldConfig>/fields/GRNitamount/visible}"
+                                            >
                                                 <m:Text text="GRN Amt" />
                                             </m:Column>
-                                            <m:Column width="5rem">
+                                            <m:Column
+                                                width="5rem"
+                                                visible="{fieldConfig>/fields/Taxper/visible}"
+                                            >
                                                 <m:Text text="Tax %" />
                                             </m:Column>
-                                            <m:Column width="6rem">
+                                            <m:Column
+                                                width="6rem"
+                                                visible="{fieldConfig>/fields/Taxval/visible}"
+                                            >
                                                 <m:Text text="Tax Amt" />
                                             </m:Column>
-                                            <m:Column width="6rem">
+                                            <m:Column
+                                                width="6rem"
+                                                visible="{fieldConfig>/fields/Total/visible}"
+                                            >
                                                 <m:Text text="Total Amt" />
                                             </m:Column>
                                         </m:columns>
 
-                                        <!-- Each Row -->
                                         <m:items>
                                             <m:ColumnListItem>
                                                 <m:cells>
-                                                    <!-- PO Number -->
                                                     <m:Text
                                                         text="{tableModel>Ebeln}"
                                                     />
-                                                    <!-- ASN Number -->
                                                     <m:Text
                                                         text="{tableModel>Vbeln}"
                                                     />
-                                                    <!-- Item No -->
                                                     <m:Text
                                                         text="{tableModel>Ebelp}"
                                                     />
-                                                    <!-- Material Description -->
                                                     <m:Text
                                                         text="{tableModel>txz01}"
                                                     />
-                                                    <!-- UOM -->
                                                     <m:Text
                                                         text="{tableModel>meins}"
                                                     />
-                                                    <!-- ASN Qty -->
                                                     <m:ObjectNumber
                                                         number="{tableModel>Asnqty}"
                                                         unit="NOS"
                                                     />
-                                                    <!-- ASN Amt -->
                                                     <m:ObjectNumber
                                                         number="{tableModel>ASNitamount}"
                                                         unit="INR"
                                                     />
-                                                    <!-- GRN Qty -->
                                                     <m:ObjectNumber
                                                         number="{tableModel>menge}"
                                                         unit="NOS"
                                                     />
-                                                    <!-- GRN Amt -->
                                                     <m:ObjectNumber
                                                         number="{tableModel>GRNitamount}"
                                                         unit="INR"
                                                     />
-                                                    <!-- Tax % -->
                                                     <m:Text
                                                         text="{tableModel>Taxper}"
                                                     />
-                                                    <!-- Tax Amt -->
                                                     <m:ObjectNumber
                                                         number="{tableModel>Taxval}"
                                                         unit="INR"
                                                     />
-                                                    <!-- Total Amt (Per-Row) -->
                                                     <m:ObjectNumber
                                                         number="{tableModel>Total}"
                                                         unit="INR"
@@ -417,7 +489,9 @@
                 titleUppercase="false"
             >
                 <subSections>
-                    <ObjectPageSubSection>
+                    <ObjectPageSubSection
+                        class="sapUiSmallNegativeMarginBeginEnd"
+                    >
                         <blocks>
                             <m:Panel
                                 xmlns:m="sap.m"

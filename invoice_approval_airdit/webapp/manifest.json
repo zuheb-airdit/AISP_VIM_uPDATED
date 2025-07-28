@@ -30,13 +30,22 @@
         },
         "dataSources": {
             "mainService": {
-                "uri": "/odata/v2/zp-aisp-povim-head-bndsample/",
+                "uri": "odata/v2/povim-customer-side/",
                 "type": "OData",
                 "settings": {
                     "annotations": [
                         "annotation0"
                     ],
                     "localUri": "localService/mainService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "admin": {
+                "uri": "/odata/v2/admin/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/admin/metadata.xml",
                     "odataVersion": "2.0"
                 }
             },
@@ -87,6 +96,11 @@
             },
             "": {
                 "dataSource": "mainService",
+                "preload": true,
+                "settings": {}
+            },
+            "admin": {
+                "dataSource": "admin",
                 "preload": true,
                 "settings": {}
             }
