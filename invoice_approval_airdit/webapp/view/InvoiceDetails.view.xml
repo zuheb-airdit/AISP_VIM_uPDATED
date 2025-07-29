@@ -62,6 +62,13 @@
                         </m:VBox>
                     </m:HBox>
                 </snappedHeading>
+                 <actions>
+                    <m:Button
+                        text="Logs"
+                        icon="sap-icon://history"
+                        press="onLogsPress"
+                    />
+                </actions>
             </ObjectPageDynamicHeaderTitle>
         </headerTitle>
 

@@ -275,6 +275,21 @@ sap.ui.define([
 
         isPending: function (sStatus) {
             return sStatus !== "APPROVED" && sStatus !== "REJECTED";
+        },
+
+        onLogsPress: function (oEvent) {
+            debugger;
+            const requestNo = this.getView().getModel("headData").getProperty("/REQUEST_NO");
+
+            if (!requestNo) {
+                sap.m.MessageToast.show("No request number found.");
+                return;
+            }
+
+            this.getOwnerComponent().getModel("appView").setProperty("/layout", "TwoColumnsBeginExpanded");
+            this.getOwnerComponent().getRouter().navTo("InvoiceLogs", {
+                requestNo: requestNo
+            });
         }
 
 

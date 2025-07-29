@@ -145,6 +145,14 @@
                         "InvoiceDetails",
                         "Invoicepdf"
                     ]
+                },
+                {
+                    "name": "InvoiceLogs",
+                    "pattern": "Invoicepdf/request/{requestNo}",
+                    "target": [
+                        "InvoiceDetails",
+                        "Invoicepdf"
+                    ]
                 }
             ],
             "targets": {
